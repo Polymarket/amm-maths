@@ -33,8 +33,9 @@
     "@ethersproject/bignumber": "^5.0.8",
     "@ethersproject/constants": "^5.0.5",
     "@types/big.js": "^6.0.0",
+    "@types/jest": "^26.0.20",
     "eslint": "6.x",
-    "eslint-config-airbnb-typescript-prettier": "^3.1.0",
+    "eslint-config-airbnb-base-typescript-prettier": "^4.1.0",
     "jest": "^26.6.3",
     "lint-staged": "^10.2.7",
     "prettier": "1.x",
@@ -54,7 +55,7 @@
   "scripts": {
     "build": "tsc --project tsconfig.production.json",
     "clean": "shx rm -rf ./lib",
-    "lint": "eslint --config ./.eslintrc.js --ignore-path ./.eslintignore ./src/**/*",
+    "lint": "eslint --config ./.eslintrc.js --ignore-path ./.eslintignore ./src/**/*.ts",
     "test": "jest",
     "prepack": "yarn clean && yarn test && yarn build"
   }
