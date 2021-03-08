@@ -20,7 +20,12 @@ export const mulBN = (a: BigNumberish, b: number, scale = 10000): BigNumber => {
  * @param scale - the factor by which to scale the numerator by before division
  */
 export const divBN = (a: BigNumberish, b: BigNumberish, scale = 10000): number => {
-  return BigNumber.from(a).mul(scale).div(b).toNumber() / scale;
+  return (
+    BigNumber.from(a)
+      .mul(scale)
+      .div(b)
+      .toNumber() / scale
+  );
 };
 
 /**
