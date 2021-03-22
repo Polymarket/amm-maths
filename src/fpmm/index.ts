@@ -5,6 +5,7 @@ export {
   calcRemoveFundingSendAmounts,
   calcDistributionHint,
   calcInitialFundingSendAmounts,
+  calcPoolBalancesAfterAddFunding,
 } from "./liquidity";
 export { calcPrice } from "./price";
 export {
