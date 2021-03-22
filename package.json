@@ -1,6 +1,6 @@
 {
   "name": "@polymarket/amm-maths",
-  "version": "0.1.1",
+  "version": "0.2.0",
   "description": "Utility package to store common maths for interacting with Conditional Tokens AMMs",
   "repository": "https://github.com/TokenUnion/amm-maths.git",
   "main": "lib/index.js",
