@@ -1,15 +1,11 @@
 import { BigNumber } from "@ethersproject/bignumber";
+import { calcAddFundingSendAmounts } from "./calcAddFundingSendAmounts";
 
 /**
- * Compute the number of outcomes that will be sent to the user by the Market Maker
- * after funding it for the first time with `addedFunds` of collateral.
+ * Compute the number of outcome tokens that will be sent to the user by the market maker after funding it for the first time with `addedFunds` of collateral.
+ * @dev The distribution hint plays the role of the pool's balances so we can just forward this to calcAddFundingSendAmounts
  * @param addedFunds - the amount of collateral being added to the market maker as liquidity
  * @param distributionHint - a distribution hint as calculated by `calcDistributionHint`
  */
-export const calcInitialFundingSendAmounts = (addedFunds: BigNumber, distributionHint: BigNumber[]): BigNumber[] => {
-  const maxHint = distributionHint.reduce((a, b) => (a.gt(b) ? a : b));
-
-  const sendAmounts = distributionHint.map(hint => addedFunds.sub(addedFunds.mul(hint).div(maxHint)));
-
-  return sendAmounts;
-};
+export const calcInitialFundingSendAmounts = (addedFunds: BigNumber, distributionHint: BigNumber[]): BigNumber[] =>
+  calcAddFundingSendAmounts(addedFunds, distributionHint);
