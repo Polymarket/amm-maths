@@ -6,3 +6,4 @@ export { calcPoolTokens } from "./calcPoolTokens";
 export { calcRemoveFundingSendAmounts } from "./calcRemoveFundingSendAmounts";
 export { calcPoolBalancesAfterAddFunding } from "./calcPoolBalancesAfterAddFunding";
 export { calcPoolBalancesAfterRemoveFunding } from "./calcPoolBalancesAfterRemoveFunding";
+export { calcAddFundingDepositedAmounts } from "./calcAddFundingDepositedAmounts";
