@@ -1,13 +1,13 @@
-import { BigNumber } from "@ethersproject/bignumber";
+import { BigNumber, BigNumberish } from "@ethersproject/bignumber";
 import { calcRemoveFundingSendAmounts } from "./calcRemoveFundingSendAmounts";
 
 export const calcPoolBalancesAfterRemoveFunding = (
-  removedFunds: BigNumber,
-  initPoolBalances: BigNumber[],
-  poolShareSupply: BigNumber,
+  removedFunds: BigNumberish,
+  initPoolBalances: BigNumberish[],
+  poolShareSupply: BigNumberish,
 ): BigNumber[] => {
   const sendAmounts = calcRemoveFundingSendAmounts(removedFunds, initPoolBalances, poolShareSupply);
 
-  const updatedPoolBalances = initPoolBalances.map((balance, i) => balance.sub(sendAmounts[i]));
+  const updatedPoolBalances = initPoolBalances.map((balance, i) => BigNumber.from(balance).sub(sendAmounts[i]));
   return updatedPoolBalances;
 };

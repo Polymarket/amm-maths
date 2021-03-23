@@ -1,4 +1,4 @@
-import { BigNumber } from "@ethersproject/bignumber";
+import { BigNumber, BigNumberish } from "@ethersproject/bignumber";
 import { calcRemoveFundingSendAmounts } from "./calcRemoveFundingSendAmounts";
 
 /**
@@ -9,10 +9,10 @@ import { calcRemoveFundingSendAmounts } from "./calcRemoveFundingSendAmounts";
  * @param poolShareSupply - the total supply of liquidity pool tokens
  */
 export const calcDepositedTokens = (
-  removedFunds: BigNumber,
-  poolBalances: BigNumber[],
-  poolShareSupply: BigNumber,
+  removedFunds: BigNumberish,
+  poolBalances: BigNumberish[],
+  poolShareSupply: BigNumberish,
 ): BigNumber => {
   const sendAmounts = calcRemoveFundingSendAmounts(removedFunds, poolBalances, poolShareSupply);
-  return sendAmounts.reduce((min: BigNumber, amount: BigNumber) => (amount.lt(min) ? amount : min));
+  return sendAmounts.reduce((min, amount) => (amount.lt(min) ? amount : min));
 };

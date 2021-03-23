@@ -1,4 +1,4 @@
-import { BigNumber } from "@ethersproject/bignumber";
+import { BigNumber, BigNumberish } from "@ethersproject/bignumber";
 import { Zero } from "@ethersproject/constants";
 
 /**
@@ -9,10 +9,16 @@ import { Zero } from "@ethersproject/constants";
  * @param poolShareSupply - the total supply of liquidity pool tokens
  */
 export const calcRemoveFundingSendAmounts = (
-  removedFunds: BigNumber,
-  poolBalances: BigNumber[],
-  poolShareSupply: BigNumber,
+  removedFunds: BigNumberish,
+  poolBalances: BigNumberish[],
+  poolShareSupply: BigNumberish,
 ): BigNumber[] => {
-  const sendAmounts = poolBalances.map(h => (poolShareSupply.gt(0) ? h.mul(removedFunds).div(poolShareSupply) : Zero));
+  const sendAmounts = poolBalances.map(h =>
+    BigNumber.from(poolShareSupply).gt(0)
+      ? BigNumber.from(h)
+          .mul(removedFunds)
+          .div(poolShareSupply)
+      : Zero,
+  );
   return sendAmounts;
 };

@@ -1,7 +1,4 @@
 /* eslint-env jest */
-import { BigNumber } from "@ethersproject/bignumber";
-import { Zero } from "@ethersproject/constants";
-
 import { computeBalanceAfterTrade } from "./computeBalanceAfterTrade";
 
 const testCases: [[number[], number, number, number], number[]][] = [
@@ -20,47 +17,36 @@ const testCases: [[number[], number, number, number], number[]][] = [
 ];
 
 describe("computeBalanceAfterTrade", () => {
+  it.each(testCases)(
+    `should compute the right balance after trade`,
+    ([holdings, outcomeIndex, collateral, shares], expected) => {
+      const result = computeBalanceAfterTrade(holdings, outcomeIndex, collateral, shares);
 
-  it.each(testCases)(`should compute the right balance after trade`, ([holdings, outcomeIndex, collateral, shares], expected) => {
-    const holdingsBN = holdings.map(BigNumber.from);
-
-    const result = computeBalanceAfterTrade(
-      holdingsBN,
-      outcomeIndex,
-      BigNumber.from(collateral),
-      BigNumber.from(shares),
-    );
-
-    result.forEach((x, i) => expect(x.toNumber()).toBeCloseTo(expected[i]));
-  });
-
+      result.forEach((x, i) => expect(x.toNumber()).toBeCloseTo(expected[i]));
+    },
+  );
 
   describe("when index is negative", () => {
     it("throws", () => {
-      const holdings = [100, 100, 100].map(BigNumber.from);
-      expect(() => computeBalanceAfterTrade(holdings, -1, BigNumber.from(50), BigNumber.from(100))).toThrow();
+      expect(() => computeBalanceAfterTrade([100, 100, 100], -1, 50, 100)).toThrow();
     });
   });
 
   describe("when index is equal to array's length", () => {
     it("throws", () => {
-      const holdings = [100, 100, 100].map(BigNumber.from);
-      expect(() => computeBalanceAfterTrade(holdings, 3, BigNumber.from(50), BigNumber.from(100))).toThrow();
+      expect(() => computeBalanceAfterTrade([100, 100, 100], 3, 50, 100)).toThrow();
     });
   });
 
   describe("when index is bigger than array's length", () => {
     it("throws", () => {
-      const holdings = [100, 100, 100].map(BigNumber.from);
-      expect(() => computeBalanceAfterTrade(holdings, 10, BigNumber.from(50), BigNumber.from(100))).toThrow();
+      expect(() => computeBalanceAfterTrade([100, 100, 100], 10, 50, 100)).toThrow();
     });
   });
 
   describe("when trade drains entirety of an outcome's balance", () => {
     it("throws", () => {
-      const holdings = [100, 100, 100].map(BigNumber.from);
-      expect(() => computeBalanceAfterTrade(holdings, 10, Zero, BigNumber.from(100))).toThrow();
+      expect(() => computeBalanceAfterTrade([100, 100, 100], 10, 0, 100)).toThrow();
     });
   });
 });
-

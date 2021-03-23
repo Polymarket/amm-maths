@@ -4,13 +4,13 @@ import { calcPoolBalancesAfterAddFunding } from "./calcPoolBalancesAfterAddFundi
 
 describe("calcPoolBalancesAfterAddFunding", () => {
   it("all holdings are different", () => {
-    const result = calcPoolBalancesAfterAddFunding(BigNumber.from(10), [1, 2, 3].map(BigNumber.from));
+    const result = calcPoolBalancesAfterAddFunding(10, [1, 2, 3]);
 
     expect(result).toStrictEqual([4, 8, 13].map(BigNumber.from));
   });
 
   it("all holdings are equal", () => {
-    const result = calcPoolBalancesAfterAddFunding(BigNumber.from(10), [3, 3, 3].map(BigNumber.from));
+    const result = calcPoolBalancesAfterAddFunding(10, [3, 3, 3]);
 
     expect(result).toStrictEqual([13, 13, 13].map(BigNumber.from));
   });

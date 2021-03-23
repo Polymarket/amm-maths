@@ -1,4 +1,4 @@
-import { BigNumber } from "@ethersproject/bignumber";
+import { BigNumber, BigNumberish } from "@ethersproject/bignumber";
 
 /**
  * Compute the number of liquidity pool tokens that will be sent to the user by the Market Maker
@@ -8,14 +8,16 @@ import { BigNumber } from "@ethersproject/bignumber";
  * @param poolShareSupply - the total supply of liquidity pool tokens
  */
 export const calcPoolTokens = (
-  addedFunds: BigNumber,
-  poolBalances: BigNumber[],
-  poolShareSupply: BigNumber,
+  addedFunds: BigNumberish,
+  poolBalances: BigNumberish[],
+  poolShareSupply: BigNumberish,
 ): BigNumber => {
-  if (poolShareSupply.eq(0)) {
-    return addedFunds;
+  if (BigNumber.from(poolShareSupply).eq(0)) {
+    return BigNumber.from(addedFunds);
   }
 
-  const poolWeight = poolBalances.reduce((max: BigNumber, h: BigNumber) => (h.gt(max) ? h : max));
-  return addedFunds.mul(poolShareSupply).div(poolWeight);
+  const poolWeight = poolBalances.reduce((max, h) => (BigNumber.from(h).gt(max) ? h : max));
+  return BigNumber.from(addedFunds)
+    .mul(poolShareSupply)
+    .div(poolWeight);
 };

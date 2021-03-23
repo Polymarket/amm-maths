@@ -1,4 +1,4 @@
-import { BigNumber } from "@ethersproject/bignumber";
+import { BigNumber, BigNumberish } from "@ethersproject/bignumber";
 import { calcAddFundingDepositedAmounts } from "./calcAddFundingDepositedAmounts";
 
 /**
@@ -6,10 +6,13 @@ import { calcAddFundingDepositedAmounts } from "./calcAddFundingDepositedAmounts
  * @param addedFunds - the amount of collateral being added to the market maker as liquidity
  * @param initPoolBalances - the market maker's initial balances of outcome tokens
  */
-export const calcPoolBalancesAfterAddFunding = (addedFunds: BigNumber, initPoolBalances: BigNumber[]): BigNumber[] => {
+export const calcPoolBalancesAfterAddFunding = (
+  addedFunds: BigNumberish,
+  initPoolBalances: BigNumberish[],
+): BigNumber[] => {
   const depositedAmounts = calcAddFundingDepositedAmounts(addedFunds, initPoolBalances);
 
-  const updatedBalances = initPoolBalances.map((balance, i) => balance.add(depositedAmounts[i]));
+  const updatedBalances = initPoolBalances.map((balance, i) => BigNumber.from(balance).add(depositedAmounts[i]));
 
   return updatedBalances;
 };

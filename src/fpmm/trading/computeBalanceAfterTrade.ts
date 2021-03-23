@@ -1,4 +1,4 @@
-import { BigNumber } from "@ethersproject/bignumber";
+import { BigNumber, BigNumberish } from "@ethersproject/bignumber";
 import { Zero } from "@ethersproject/constants";
 
 /**
@@ -12,10 +12,10 @@ import { Zero } from "@ethersproject/constants";
  * @param sharesBoughtAmount - the amount of outcome tokens being removed from the market maker
  */
 export const computeBalanceAfterTrade = (
-  initialPoolBalances: BigNumber[],
+  initialPoolBalances: BigNumberish[],
   outcomeIndex: number,
-  investmentAmount: BigNumber,
-  sharesRemovedAmount: BigNumber,
+  investmentAmount: BigNumberish,
+  sharesRemovedAmount: BigNumberish,
 ): BigNumber[] => {
   if (outcomeIndex < 0 || outcomeIndex >= initialPoolBalances.length) {
     throw new Error(`Outcome index '${outcomeIndex}' must be between 0 and '${initialPoolBalances.length - 1}'`);
@@ -23,7 +23,9 @@ export const computeBalanceAfterTrade = (
 
   // By default we treat a trade as a purchase of shares, sales can be treated as a purchase of a negative number of shares.
   const newPoolBalances = initialPoolBalances.map((h, i) =>
-    h.add(investmentAmount).sub(i === outcomeIndex ? sharesRemovedAmount : Zero),
+    BigNumber.from(h)
+      .add(investmentAmount)
+      .sub(i === outcomeIndex ? sharesRemovedAmount : Zero),
   );
 
   if (newPoolBalances.some(balance => balance.lte(0))) {

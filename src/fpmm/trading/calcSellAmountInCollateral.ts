@@ -1,4 +1,4 @@
-import { BigNumber } from "@ethersproject/bignumber";
+import { BigNumber, BigNumberish } from "@ethersproject/bignumber";
 import { newtonRaphson } from "@fvictorio/newton-raphson-method";
 import Big from "big.js";
 
@@ -12,9 +12,9 @@ import Big from "big.js";
  * @param fee The fee of the market maker, between 0 and 1
  */
 export const calcSellAmountInCollateral = (
-  sharesToSell: BigNumber,
+  sharesToSell: BigNumberish,
   outcomeIndex: number,
-  poolBalances: BigNumber[],
+  poolBalances: BigNumberish[],
   fee: number,
 ): BigNumber | null => {
   Big.DP = 90;

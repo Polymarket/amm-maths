@@ -1,4 +1,4 @@
-import { BigNumber } from "@ethersproject/bignumber";
+import { BigNumber, BigNumberish } from "@ethersproject/bignumber";
 import { calcAddFundingDepositedAmounts } from "./calcAddFundingDepositedAmounts";
 
 /**
@@ -7,5 +7,7 @@ import { calcAddFundingDepositedAmounts } from "./calcAddFundingDepositedAmounts
  * @param addedFunds - the amount of collateral being added to the market maker as liquidity
  * @param poolBalances - the market maker's balances of outcome tokens
  */
-export const calcInitialFundingDepositedAmounts = (addedFunds: BigNumber, distributionHint: BigNumber[]): BigNumber[] =>
-  calcAddFundingDepositedAmounts(addedFunds, distributionHint);
+export const calcInitialFundingDepositedAmounts = (
+  addedFunds: BigNumberish,
+  distributionHint: BigNumberish[],
+): BigNumber[] => calcAddFundingDepositedAmounts(addedFunds, distributionHint);

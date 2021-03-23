@@ -32,12 +32,7 @@ describe("calcSellAmountInCollateral", () => {
   it.each(testCases)(
     `should compute the amount of collateral to sell`,
     ([sharesToSell, outcomeIndex, poolBalances, fee], expected) => {
-      const result = calcSellAmountInCollateral(
-        BigNumber.from(sharesToSell),
-        outcomeIndex,
-        poolBalances.map(BigNumber.from),
-        fee,
-      );
+      const result = calcSellAmountInCollateral(sharesToSell, outcomeIndex, poolBalances, fee);
 
       expect(result).not.toBe(null);
 
