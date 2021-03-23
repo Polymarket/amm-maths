@@ -10,4 +10,9 @@ import { calcAddFundingDepositedAmounts } from "./calcAddFundingDepositedAmounts
 export const calcInitialFundingDepositedAmounts = (
   addedFunds: BigNumberish,
   distributionHint: BigNumberish[],
-): BigNumber[] => calcAddFundingDepositedAmounts(addedFunds, distributionHint);
+): BigNumber[] => {
+  if (distributionHint.some(x => BigNumber.from(x).isZero())) {
+    throw new Error("Invalid Distribution Hint - can't assign a weight of zero to an outcome");
+  }
+  return calcAddFundingDepositedAmounts(addedFunds, distributionHint);
+};

@@ -14,4 +14,10 @@ describe("calcAddFundingDepositedAmounts", () => {
 
     expect(result).toStrictEqual([10, 10, 10].map(BigNumber.from));
   });
+
+  it("initial pool balances includes a zero", () => {
+    expect(() => calcAddFundingDepositedAmounts(10, [0, 0, 0])).toThrowError(
+      "Invalid Pool Balances - you must provide a distribution hint for the desired weightings of the pool",
+    );
+  });
 });
