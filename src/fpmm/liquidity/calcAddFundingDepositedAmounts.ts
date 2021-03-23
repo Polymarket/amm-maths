@@ -6,6 +6,12 @@ import { BigNumber, BigNumberish } from "@ethersproject/bignumber";
  * @param poolBalances - the market maker's balances of outcome tokens
  */
 export const calcAddFundingDepositedAmounts = (addedFunds: BigNumberish, poolBalances: BigNumberish[]): BigNumber[] => {
+  if (poolBalances.some(x => BigNumber.from(x).isZero())) {
+    throw new Error(
+      "Invalid Pool Balances - you must provide a distribution hint for the desired weightings of the pool",
+    );
+  }
+
   const poolWeight = poolBalances.reduce((a, b) => (BigNumber.from(a).gt(b) ? a : b));
 
   const depositAmounts = poolBalances.map(h =>
