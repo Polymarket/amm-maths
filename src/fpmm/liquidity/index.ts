@@ -4,7 +4,5 @@ export { calcDistributionHint } from "./calcDistributionHint";
 export { calcInitialFundingSendAmounts } from "./calcInitialFundingSendAmounts";
 export { calcPoolTokens } from "./calcPoolTokens";
 export { calcRemoveFundingSendAmounts } from "./calcRemoveFundingSendAmounts";
-export { calcPoolBalancesAfterAddFunding } from "./calcPoolBalancesAfterAddFunding";
-export { calcPoolBalancesAfterRemoveFunding } from "./calcPoolBalancesAfterRemoveFunding";
 export { calcAddFundingDepositedAmounts } from "./calcAddFundingDepositedAmounts";
 export { calcInitialFundingDepositedAmounts } from "./calcInitialFundingDepositedAmounts";
