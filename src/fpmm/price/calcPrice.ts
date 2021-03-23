@@ -1,11 +1,11 @@
-import { BigNumber } from "@ethersproject/bignumber";
+import { BigNumberish } from "@ethersproject/bignumber";
 import Big from "big.js";
 
 /**
  * Computes the price of each outcome token given their holdings. Returns an array of numbers in the range [0, 1]
  * @param poolBalances - the market maker's balances of outcome tokens
  */
-export const calcPrice = (poolBalances: BigNumber[]): number[] => {
+export const calcPrice = (poolBalances: BigNumberish[]): number[] => {
   const balances = poolBalances.map(h => new Big(h.toString()));
 
   const hasZeroBalances = balances.every(h => h.toString() === "0");

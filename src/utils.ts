@@ -33,6 +33,7 @@ export const divBN = (a: BigNumberish, b: BigNumberish, scale = 10000): number =
  * @param a - the numerator
  * @param b - the denominator
  */
-export const ceilDiv = (a: BigNumber, b: BigNumber): BigNumber => {
-  return a.mod(b) === Zero ? a.div(b) : a.div(b).add(1);
+export const ceilDiv = (a: BigNumberish, b: BigNumberish): BigNumber => {
+  const aBN = BigNumber.from(a);
+  return aBN.mod(b) === Zero ? aBN.div(b) : aBN.div(b).add(1);
 };

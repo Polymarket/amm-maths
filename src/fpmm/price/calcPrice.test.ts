@@ -1,5 +1,4 @@
 /* eslint-env jest */
-import { BigNumber } from "@ethersproject/bignumber";
 import { calcPrice } from "./calcPrice";
 
 const testCases: [number[], number[]][] = [
@@ -38,11 +37,9 @@ const testCases: [number[], number[]][] = [
 ];
 
 describe("calcPrice", () => {
-    it.each(testCases)(`should compute the right price`, (balances, expectedPrices) => {
-      const holdingsBN = balances.map(BigNumber.from);
-      const prices = calcPrice(holdingsBN);
+  it.each(testCases)(`should compute the right price`, (balances, expectedPrices) => {
+    const prices = calcPrice(balances);
 
-      prices.forEach((price, index) => expect(price).toBeCloseTo(expectedPrices[index]));
-    });
+    prices.forEach((price, index) => expect(price).toBeCloseTo(expectedPrices[index]));
+  });
 });
-

@@ -3,7 +3,7 @@ import Big from "big.js";
 
 import { calcDistributionHint } from "../..";
 
-const testCases: [number[], number[]][]= [
+const testCases: [number[], number[]][] = [
   [
     [60, 40],
     [816497, 1224745],
@@ -55,7 +55,6 @@ const testCases: [number[], number[]][]= [
 ];
 
 describe("calcDistributionHint", () => {
-
   it.each(testCases)(`should compute the right distribution hint`, (odds, expectedHintsNumbers) => {
     const distributionHints = calcDistributionHint(odds).map(x => new Big(x.toString()));
 

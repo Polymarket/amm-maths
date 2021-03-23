@@ -1,4 +1,4 @@
-import { BigNumber } from "@ethersproject/bignumber";
+import { BigNumber, BigNumberish } from "@ethersproject/bignumber";
 import { Zero } from "@ethersproject/constants";
 import { mulBN } from "../../utils";
 import { computeBalanceAfterTrade } from "./computeBalanceAfterTrade";
@@ -12,15 +12,15 @@ import { computeBalanceAfterTrade } from "./computeBalanceAfterTrade";
  * @param fees - the percentage fees taken by the market maker on each trade
  */
 export const computeBalanceAfterShareSale = (
-  initialPoolBalances: BigNumber[],
+  initialPoolBalances: BigNumberish[],
   outcomeIndex: number,
-  returnAmount: BigNumber,
-  sharesSoldAmount: BigNumber,
+  returnAmount: BigNumberish,
+  sharesSoldAmount: BigNumberish,
   fees: number,
 ): BigNumber[] =>
   computeBalanceAfterTrade(
     initialPoolBalances,
     outcomeIndex,
     fees !== 1 ? mulBN(returnAmount, 1 / (1 - fees)).mul(-1) : Zero,
-    sharesSoldAmount.mul(-1),
+    BigNumber.from(sharesSoldAmount).mul(-1),
   );
